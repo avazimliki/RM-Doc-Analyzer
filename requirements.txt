@@ -1,0 +1,6 @@
+flask
+python-docx
+PyPDF2
+werkzeug
+spacy
+en_core_web_sm

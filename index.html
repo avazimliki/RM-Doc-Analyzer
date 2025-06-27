@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extended Document Analyzer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: auto; }
+        .results, .specs { margin-top: 30px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Upload Raw Material Documents for Extended AI Analysis</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="files" multiple required>
+        <button type="submit">Upload and Analyze</button>
+    </form>
+
+    {% if results %}
+    <div class="results">
+        <h3>Missing Fields:</h3>
+        <ul>
+        {% for filename, missing_keywords in results.items() %}
+            <li><strong>{{ filename }}</strong>: {{ missing_keywords|join(", ") }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if specs %}
+    <div class="specs">
+        <h3>Extracted Specifications:</h3>
+        <ul>
+        {% for filename, values in specs.items() %}
+            <li><strong>{{ filename }}</strong>:
+                <ul>
+                {% for key, val in values.items() %}
+                    <li>{{ key }}: {{ val }}</li>
+                {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
